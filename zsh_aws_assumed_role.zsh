@@ -31,8 +31,7 @@ spaceship_aws_assumed_role() {
 
   if [[ -n "$AWS_SESSION_TOKEN" && -n "$AWS_ACCESS_KEY_ID" && -n "$AWS_SECRET_ACCESS_KEY" ]]; then
     account_id=$(aws sts get-caller-identity | jq -r .Account)
-    account_name=$(aws organizations describe-account --account-id $account_id | jq -r .Account.Name)
-    aws_assumed_role=$account_name
+    aws_assumed_role=$account_id
   else
       unset aws_assumed_role
   fi
